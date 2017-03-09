@@ -4,81 +4,76 @@ RootWidget:
     Label:
         id: facilitators
         text: 'facilitators'
-        size_hint: 0.5,0.1
-        pos_hint: {'center_x': 0.5 , 'top': (self.parent.height + 1.75*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.5 , 'top': 1 }
+    
     Button:
         id: fac_dude_btn
         text: 'a dude'
-        size_hint: 0.25,0.1
-        pos_hint: {'center_x': (self.parent.width - 5 - 0.5*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height + 1.5*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.45,0.3
+        pos_hint: {'center_x': 0.25 , 'top': 0.95 }
         on_press: self.parent.tap( 'fac_dude' )
     Label:
         id: fac_dude_time
-        text: '00:00:00'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width - 5 - 0.75*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height + 1*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.375 , 'center_y': 0.875 }
     Label:
         id: fac_dude_pct
-        text: '0%'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width - 5 - 0.25*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height + 1*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.125 , 'center_y': 0.875 }
+        
     Button:
         id: fac_nd_btn
         text: 'not a dude'
-        size_hint: 0.25,0.1
-        pos_hint: {'center_x': (self.parent.width + 5 + 0.5*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height + 1.5*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.45,0.3
+        pos_hint: {'center_x': 0.75 , 'top': 0.95 }
         on_press: self.parent.tap( 'fac_nd' )
     Label:
         id: fac_nd_time
-        text: '00:00:00'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width + 5 + 0.75*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height + 1*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.625 , 'center_y': 0.875 }
     Label:
         id: fac_nd_pct
-        text: '0%'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width + 5 + 0.25*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height + 1*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.875 , 'center_y': 0.875 }
 
     Button:
         text: 'pause'
-        size_hint: 0.25,0.1
-        pos_hint: {'center_x': 0.5 , 'top' : (self.parent.height + 0.5*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.45,0.2
+        pos_hint: {'center_x': 0.5 , 'center_y' : 0.5 }
         on_press: self.parent.tap( 'pause' )
 
     Button:
         id: nf_dude_btn
         text: 'a dude'
-        size_hint: 0.25,0.1
-        pos_hint: {'center_x': (self.parent.width - 5 - 0.5*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height - 0.5*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.45,0.3
+        pos_hint: {'center_x': 0.25 , 'top': 0.35 }
         on_press: self.parent.tap( 'nf_dude' )        
     Label:
         id: nf_dude_time
-        text: '00:00:00'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width - 5 - 0.75*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height - 0*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.375 , 'center_y': 0.125 }
     Label:
         id: nf_dude_pct
-        text: '0%'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width - 5 - 0.25*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height - 0*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.125 , 'center_y': 0.125 }
 
     Button:
         id: nf_nd_btn
         text: 'not a dude'
-        size_hint: 0.25,0.1
-        pos_hint: {'center_x': (self.parent.width + 5 + 0.5*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height - 0.5*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.45,0.3
+        pos_hint: {'center_x': 0.75 , 'top': 0.35 }
         on_press: self.parent.tap( 'nf_nd' )
     Label:
         id: nf_nd_time
-        text: '00:00:00'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width + 5 + 0.75*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height - 0*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.625 , 'center_y': 0.125 }
     Label:
         id: nf_nd_pct
-        text: '0%'
         size_hint: 0.125,0.1
-        pos_hint: {'center_x': (self.parent.width + 5 + 0.25*(self.parent.width*0.25) - (self.parent.width/2)) / self.parent.width , 'top': (self.parent.height - 0*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        pos_hint: {'center_x': 0.875 , 'center_y': 0.125 }
+    
     Label:
         text: 'non-facilitators'
-        size_hint: 0.5,0.1
-        pos_hint: {'center_x': 0.5 , 'top': (self.parent.height - 0.75*(5 + self.parent.height*0.25) - (self.parent.height/2)) / self.parent.height }
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.5 , 'bottom': 1 }
