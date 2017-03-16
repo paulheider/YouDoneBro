@@ -44,6 +44,13 @@ class StopWatch(EventDispatcher):
             self.__running = False
         return self.get_elapsed()
     
+    def reset(self):
+        """Clears any accrued time on the stopwatch."""
+
+        self.__offset = 0
+        self.__start_time = 0
+        self.__running = False
+    
     def __init__(self):
         self.__offset = 0
         self.__start_time = 0
@@ -55,44 +62,81 @@ class StopWatch(EventDispatcher):
         minutes, seconds = divmod( remainder , 60 )
         return '{:02d}:{:02d}:{:02d}'.format( hours , minutes , seconds )
 
+from kivy.clock import Clock
+from functools import partial
 
 class RootWidget(FloatLayout):
     fac_dude_watch = ObjectProperty(None)
     fac_nd_watch = ObjectProperty(None)
     nf_dude_watch = ObjectProperty(None)
     nf_nd_watch = ObjectProperty(None)
+    clear_event = ObjectProperty(None)
     
+    def clear_time( self , *args ):
+        self.fac_dude_watch.reset()
+        self.fac_nd_watch.reset()
+        self.nf_dude_watch.reset()
+        self.nf_nd_watch.reset()
+        ## Clear the displayed times
+        four_way_timers.ids[ 'fac_dude_time' ].text = '{}'.format( self.fac_dude_watch )
+        four_way_timers.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
+        four_way_timers.ids[ 'nf_dude_time' ].text = '{}'.format( self.nf_dude_watch )
+        four_way_timers.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
+        ## Clear the displayed percentages
+        four_way_timers.ids[ 'fac_dude_pct' ].text = '{:0.02f}%'.format( 0 )
+        four_way_timers.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 0 )
+        four_way_timers.ids[ 'nf_dude_pct' ].text = '{:0.02f}%'.format( 0 )
+        four_way_timers.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 0 )
+    
+    def press(self, button):
+        if( button == 'clear' ):
+            self.clear_event = partial( self.clear_time )
+            Clock.schedule_once( self.clear_event , 2 )
+            
+    def release(self, button):
+        if( button == 'clear' ):
+            Clock.unschedule( self.clear_event )
+            self.clear_event = ObjectProperty(None)
+
     def tap(self, button):
         if( button == 'pause' ):
             self.fac_dude_watch.stop()
             self.fac_nd_watch.stop()
             self.nf_dude_watch.stop()
             self.nf_nd_watch.stop()
-        elif( button == 'fac_dude' and
-              not self.fac_dude_watch.get_running() ):
-            self.fac_dude_watch.start()
-            self.fac_nd_watch.stop()
-            self.nf_dude_watch.stop()
-            self.nf_nd_watch.stop()
-        elif( button == 'fac_nd' and
-              not self.fac_nd_watch.get_running() ):
-            self.fac_dude_watch.stop()
-            self.fac_nd_watch.start()
-            self.nf_dude_watch.stop()
-            self.nf_nd_watch.stop()
-        elif( button == 'nf_dude' and
-              not self.nf_dude_watch.get_running() ):
-            self.fac_dude_watch.stop()
-            self.fac_nd_watch.stop()
-            self.nf_dude_watch.start()
-            self.nf_nd_watch.stop()
-        elif( button == 'nf_nd' and
-              not self.nf_nd_watch.get_running() ):
-            self.fac_dude_watch.stop()
-            self.fac_nd_watch.stop()
-            self.nf_dude_watch.stop()
-            self.nf_nd_watch.start()
-            
+        elif( button == 'fac_dude' ):
+            if( self.fac_dude_watch.get_running() ):
+                self.fac_dude_watch.stop()
+            else:
+                self.fac_dude_watch.start()
+                self.fac_nd_watch.stop()
+                self.nf_dude_watch.stop()
+                self.nf_nd_watch.stop()
+        elif( button == 'fac_nd' ):
+            if( self.fac_nd_watch.get_running() ):
+                self.fac_nd_watch.stop()
+            else:
+                self.fac_dude_watch.stop()
+                self.fac_nd_watch.start()
+                self.nf_dude_watch.stop()
+                self.nf_nd_watch.stop()
+        elif( button == 'nf_dude' ):
+            if( self.nf_dude_watch.get_running() ):
+                self.nf_dude_watch.stop()
+            else:
+                self.fac_dude_watch.stop()
+                self.fac_nd_watch.stop()
+                self.nf_dude_watch.start()
+                self.nf_nd_watch.stop()
+        elif( button == 'nf_nd' ):
+            if( self.nf_nd_watch.get_running() ):
+                self.nf_nd_watch.stop()
+            else:
+                self.fac_dude_watch.stop()
+                self.fac_nd_watch.stop()
+                self.nf_dude_watch.stop()
+                self.nf_nd_watch.start()
+        
     def update( self, *args ):
         four_way_timers.ids[ 'fac_dude_time' ].text = '{}'.format( self.fac_dude_watch )
         four_way_timers.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
