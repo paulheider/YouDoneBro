@@ -66,26 +66,26 @@ from kivy.clock import Clock
 from functools import partial
 
 class RootWidget(FloatLayout):
-    fac_dude_watch = ObjectProperty(None)
+    fac_bro_watch = ObjectProperty(None)
     fac_nd_watch = ObjectProperty(None)
-    nf_dude_watch = ObjectProperty(None)
+    nf_bro_watch = ObjectProperty(None)
     nf_nd_watch = ObjectProperty(None)
     clear_event = ObjectProperty(None)
     
     def clear_time( self , *args ):
-        self.fac_dude_watch.reset()
+        self.fac_bro_watch.reset()
         self.fac_nd_watch.reset()
-        self.nf_dude_watch.reset()
+        self.nf_bro_watch.reset()
         self.nf_nd_watch.reset()
         ## Clear the displayed times
-        four_way_timers.ids[ 'fac_dude_time' ].text = '{}'.format( self.fac_dude_watch )
+        four_way_timers.ids[ 'fac_bro_time' ].text = '{}'.format( self.fac_bro_watch )
         four_way_timers.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
-        four_way_timers.ids[ 'nf_dude_time' ].text = '{}'.format( self.nf_dude_watch )
+        four_way_timers.ids[ 'nf_bro_time' ].text = '{}'.format( self.nf_bro_watch )
         four_way_timers.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
         ## Clear the displayed percentages
-        four_way_timers.ids[ 'fac_dude_pct' ].text = '{:0.02f}%'.format( 0 )
+        four_way_timers.ids[ 'fac_bro_pct' ].text = '{:0.02f}%'.format( 0 )
         four_way_timers.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 0 )
-        four_way_timers.ids[ 'nf_dude_pct' ].text = '{:0.02f}%'.format( 0 )
+        four_way_timers.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 0 )
         four_way_timers.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 0 )
     
     def press(self, button):
@@ -100,63 +100,63 @@ class RootWidget(FloatLayout):
 
     def tap(self, button):
         if( button == 'pause' ):
-            self.fac_dude_watch.stop()
+            self.fac_bro_watch.stop()
             self.fac_nd_watch.stop()
-            self.nf_dude_watch.stop()
+            self.nf_bro_watch.stop()
             self.nf_nd_watch.stop()
-        elif( button == 'fac_dude' ):
-            if( self.fac_dude_watch.get_running() ):
-                self.fac_dude_watch.stop()
+        elif( button == 'fac_bro' ):
+            if( self.fac_bro_watch.get_running() ):
+                self.fac_bro_watch.stop()
             else:
-                self.fac_dude_watch.start()
+                self.fac_bro_watch.start()
                 self.fac_nd_watch.stop()
-                self.nf_dude_watch.stop()
+                self.nf_bro_watch.stop()
                 self.nf_nd_watch.stop()
         elif( button == 'fac_nd' ):
             if( self.fac_nd_watch.get_running() ):
                 self.fac_nd_watch.stop()
             else:
-                self.fac_dude_watch.stop()
+                self.fac_bro_watch.stop()
                 self.fac_nd_watch.start()
-                self.nf_dude_watch.stop()
+                self.nf_bro_watch.stop()
                 self.nf_nd_watch.stop()
-        elif( button == 'nf_dude' ):
-            if( self.nf_dude_watch.get_running() ):
-                self.nf_dude_watch.stop()
+        elif( button == 'nf_bro' ):
+            if( self.nf_bro_watch.get_running() ):
+                self.nf_bro_watch.stop()
             else:
-                self.fac_dude_watch.stop()
+                self.fac_bro_watch.stop()
                 self.fac_nd_watch.stop()
-                self.nf_dude_watch.start()
+                self.nf_bro_watch.start()
                 self.nf_nd_watch.stop()
         elif( button == 'nf_nd' ):
             if( self.nf_nd_watch.get_running() ):
                 self.nf_nd_watch.stop()
             else:
-                self.fac_dude_watch.stop()
+                self.fac_bro_watch.stop()
                 self.fac_nd_watch.stop()
-                self.nf_dude_watch.stop()
+                self.nf_bro_watch.stop()
                 self.nf_nd_watch.start()
         
     def update( self, *args ):
-        four_way_timers.ids[ 'fac_dude_time' ].text = '{}'.format( self.fac_dude_watch )
+        four_way_timers.ids[ 'fac_bro_time' ].text = '{}'.format( self.fac_bro_watch )
         four_way_timers.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
-        four_way_timers.ids[ 'nf_dude_time' ].text = '{}'.format( self.nf_dude_watch )
+        four_way_timers.ids[ 'nf_bro_time' ].text = '{}'.format( self.nf_bro_watch )
         four_way_timers.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
-        total_time = self.fac_dude_watch.get_elapsed() + \
+        total_time = self.fac_bro_watch.get_elapsed() + \
                      self.fac_nd_watch.get_elapsed() + \
-                     self.nf_dude_watch.get_elapsed() + \
+                     self.nf_bro_watch.get_elapsed() + \
                      self.nf_nd_watch.get_elapsed()
         if( total_time > 0 ):
-            four_way_timers.ids[ 'fac_dude_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_dude_watch.get_elapsed() / total_time )
+            four_way_timers.ids[ 'fac_bro_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_bro_watch.get_elapsed() / total_time )
             four_way_timers.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_nd_watch.get_elapsed() / total_time )
-            four_way_timers.ids[ 'nf_dude_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_dude_watch.get_elapsed() / total_time )
+            four_way_timers.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_bro_watch.get_elapsed() / total_time )
             four_way_timers.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_nd_watch.get_elapsed() / total_time )
     
     def __init__(self, **kwargs):
         super(RootWidget, self).__init__(**kwargs)
-        self.fac_dude_watch = StopWatch()
+        self.fac_bro_watch = StopWatch()
         self.fac_nd_watch = StopWatch()
-        self.nf_dude_watch = StopWatch()
+        self.nf_bro_watch = StopWatch()
         self.nf_nd_watch = StopWatch()
         Clock.schedule_interval( self.update , 1 )
 
