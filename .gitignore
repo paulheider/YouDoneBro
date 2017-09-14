@@ -1,5 +1,10 @@
 *~
 *.pyc
+\#*
+\.\#*
 
 bin/
 .buildozer/
+.cache/
+
+.coverage
