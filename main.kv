@@ -1,6 +1,40 @@
-RootWidget:
+ScreenManagement:
+    RootWidget:
+    AboutScreen:
+
+<AboutScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            markup: True
+            halign: 'center'
+            text_size: [None,None]
+            text: '[b]\'"You Done, Bro?\"[/b]\nAn app for monitoring gender and status biases\nin conversational turn-taking patterns'
+        Label:
+            markup: True
+            halign: 'center'
+            text: '[b]Lead Dev:[/b]\nPaul M. Heider'
+        Label:
+            markup: True
+            halign: 'center'
+            text: '[b]Contributions or Bugs?[/b]\n[i]https://github.com/paulheider/YouDoneBro/issues[/i]'
+        Label:
+            markup: True
+            halign: 'center'
+            text: '[b]Source Code:[/b]\n[i]https://github.com/paulheider/YouDoneBro[/i]'
+        Label:
+            markup: True
+            halign: 'center'
+            text: '[b]Version:[/b]  1.5'
+        Button:
+            text: 'Back to App'
+            on_release:
+                root.manager.transition.direction = 'up'
+                root.manager.current = 'Four-Way Tracker'
+
+<RootWidget>:
     size_hint: 1,1
-    
+        
     Label:
         id: facilitators
         text: 'facilitators'
@@ -41,11 +75,13 @@ RootWidget:
 
 
     Button:
-        text: 'save'
-        disabled: True
+        id: about_btn
+        text: 'about'
         size_hint: 0.1,0.1
         pos_hint: {'center_x': 0.1 , 'center_y' : 0.5 }
-        on_press: self.parent.tap( 'save' )
+        on_release:
+            root.manager.transition.direction = 'down'
+            root.manager.current = 'About'
         font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 2 )
     Button:
         text: 'pause'

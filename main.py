@@ -10,6 +10,8 @@ kivy.require('1.9.1')
 from kivy.app import App
 from kivy.lang import Builder
 
+from kivy.uix.screenmanager import ScreenManager, Screen
+
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -65,7 +67,13 @@ class StopWatch(EventDispatcher):
 from kivy.clock import Clock
 from functools import partial
 
-class RootWidget(FloatLayout):
+class ScreenManagement( ScreenManager ):
+    pass
+
+class AboutScreen(Screen):
+    pass
+
+class RootWidget(Screen): ##FloatLayout
     fac_bro_watch = ObjectProperty(None)
     fac_nd_watch = ObjectProperty(None)
     nf_bro_watch = ObjectProperty(None)
@@ -73,20 +81,21 @@ class RootWidget(FloatLayout):
     clear_event = ObjectProperty(None)
     
     def clear_time( self , *args ):
+        self.ids[ 'about_btn' ].disabled = False
         self.fac_bro_watch.reset()
         self.fac_nd_watch.reset()
         self.nf_bro_watch.reset()
         self.nf_nd_watch.reset()
         ## Clear the displayed times
-        four_way_timers.ids[ 'fac_bro_time' ].text = '{}'.format( self.fac_bro_watch )
-        four_way_timers.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
-        four_way_timers.ids[ 'nf_bro_time' ].text = '{}'.format( self.nf_bro_watch )
-        four_way_timers.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
+        self.ids[ 'fac_bro_time' ].text = '{}'.format( self.fac_bro_watch )
+        self.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
+        self.ids[ 'nf_bro_time' ].text = '{}'.format( self.nf_bro_watch )
+        self.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
         ## Clear the displayed percentages
-        four_way_timers.ids[ 'fac_bro_pct' ].text = '{:0.02f}%'.format( 0 )
-        four_way_timers.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 0 )
-        four_way_timers.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 0 )
-        four_way_timers.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 0 )
+        self.ids[ 'fac_bro_pct' ].text = '{:0.02f}%'.format( 0 )
+        self.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 0 )
+        self.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 0 )
+        self.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 0 )
     
     def press(self, button):
         if( button == 'clear' ):
@@ -99,6 +108,7 @@ class RootWidget(FloatLayout):
             self.clear_event = ObjectProperty(None)
 
     def tap(self, button):
+        self.ids[ 'about_btn' ].disabled = True
         if( button == 'pause' ):
             self.fac_bro_watch.stop()
             self.fac_nd_watch.stop()
@@ -138,19 +148,19 @@ class RootWidget(FloatLayout):
                 self.nf_nd_watch.start()
         
     def update( self, *args ):
-        four_way_timers.ids[ 'fac_bro_time' ].text = '{}'.format( self.fac_bro_watch )
-        four_way_timers.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
-        four_way_timers.ids[ 'nf_bro_time' ].text = '{}'.format( self.nf_bro_watch )
-        four_way_timers.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
+        self.ids[ 'fac_bro_time' ].text = '{}'.format( self.fac_bro_watch )
+        self.ids[ 'fac_nd_time' ].text = '{}'.format( self.fac_nd_watch )
+        self.ids[ 'nf_bro_time' ].text = '{}'.format( self.nf_bro_watch )
+        self.ids[ 'nf_nd_time' ].text = '{}'.format( self.nf_nd_watch )
         total_time = self.fac_bro_watch.get_elapsed() + \
                      self.fac_nd_watch.get_elapsed() + \
                      self.nf_bro_watch.get_elapsed() + \
                      self.nf_nd_watch.get_elapsed()
         if( total_time > 0 ):
-            four_way_timers.ids[ 'fac_bro_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_bro_watch.get_elapsed() / total_time )
-            four_way_timers.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_nd_watch.get_elapsed() / total_time )
-            four_way_timers.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_bro_watch.get_elapsed() / total_time )
-            four_way_timers.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_nd_watch.get_elapsed() / total_time )
+            self.ids[ 'fac_bro_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_bro_watch.get_elapsed() / total_time )
+            self.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 100 * self.fac_nd_watch.get_elapsed() / total_time )
+            self.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_bro_watch.get_elapsed() / total_time )
+            self.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 100 * self.nf_nd_watch.get_elapsed() / total_time )
     
     def __init__(self, **kwargs):
         super(RootWidget, self).__init__(**kwargs)
@@ -160,12 +170,15 @@ class RootWidget(FloatLayout):
         self.nf_nd_watch = StopWatch()
         Clock.schedule_interval( self.update , 1 )
 
-four_way_timers = Builder.load_file( "main.kv" )
+screen_mngr = Builder.load_file( "main.kv" )
+about_screen = AboutScreen( name = 'About' )
+screen_mngr.add_widget( about_screen )
+screen_mngr.add_widget( RootWidget( name = 'Four-Way Tracker' ) )
 
 class YouDoneBroApp(App):
     
     def build(self):
-        return four_way_timers
+        return screen_mngr
 
 if __name__ == '__main__':
     YouDoneBroApp().run()
