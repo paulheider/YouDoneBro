@@ -25,7 +25,7 @@ ScreenManagement:
         Label:
             markup: True
             halign: 'center'
-            text: '[b]Version:[/b]  1.5'
+            text: '[b]Version:[/b]  1.6'
         Button:
             text: 'Back to App'
             on_release:
@@ -35,12 +35,6 @@ ScreenManagement:
 <RootWidget>:
     size_hint: 1,1
         
-    Label:
-        id: facilitators
-        text: 'facilitators'
-        size_hint: 0.5,0.05
-        pos_hint: {'center_x': 0.5 , 'top': 1 }
-    
     Button:
         id: fac_bro_btn
         text: 'a bro'
@@ -48,6 +42,11 @@ ScreenManagement:
         pos_hint: {'center_x': 0.25 , 'top': 0.95 }
         on_press: self.parent.tap( 'fac_bro' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Label:
+        id: fac_bro_lbl
+        text: '(facilitator)'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.25 , 'center_y': 0.7 }
     Label:
         id: fac_bro_time
         size_hint: 0.125,0.1
@@ -64,6 +63,11 @@ ScreenManagement:
         pos_hint: {'center_x': 0.75 , 'top': 0.95 }
         on_press: self.parent.tap( 'fac_nd' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Label:
+        id: fac_nd_lbl
+        text: '(facilitator)'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.75 , 'center_y': 0.7 }
     Label:
         id: fac_nd_time
         size_hint: 0.125,0.1
@@ -82,7 +86,7 @@ ScreenManagement:
         on_release:
             root.manager.transition.direction = 'down'
             root.manager.current = 'About'
-        font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 2 )
+        font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 3 )
     Button:
         text: 'pause'
         size_hint: 0.45,0.2
@@ -97,7 +101,7 @@ ScreenManagement:
         ##on_touch_up: self.parent.delete_clock()
         on_press: self.parent.press( 'clear' )
         on_release: self.parent.release( 'clear' )
-        font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 2 )
+        font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 3 )
 
     Button:
         id: nf_bro_btn
@@ -106,6 +110,11 @@ ScreenManagement:
         pos_hint: {'center_x': 0.25 , 'top': 0.35 }
         on_press: self.parent.tap( 'nf_bro' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Label:
+        id: nf_bro_lbl
+        text: '(non-facilitator)'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.25 , 'center_y': 0.3 }
     Label:
         id: nf_bro_time
         size_hint: 0.125,0.1
@@ -123,6 +132,11 @@ ScreenManagement:
         on_press: self.parent.tap( 'nf_nd' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
     Label:
+        id: nf_nd_lbl
+        text: '(non-facilitator)'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.75 , 'center_y': 0.3 }
+    Label:
         id: nf_nd_time
         size_hint: 0.125,0.1
         pos_hint: {'center_x': 0.625 , 'center_y': 0.125 }
@@ -130,8 +144,3 @@ ScreenManagement:
         id: nf_nd_pct
         size_hint: 0.125,0.1
         pos_hint: {'center_x': 0.875 , 'center_y': 0.125 }
-    
-    Label:
-        text: 'non-facilitators'
-        size_hint: 0.5,0.05
-        pos_hint: {'center_x': 0.5 , 'bottom': 1 }
