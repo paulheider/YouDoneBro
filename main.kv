@@ -1,3 +1,20 @@
+###########################################################################
+# This file is part of 'You Done, Bro?'.
+#
+# 'You Done, Bro?' is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# 'You Done, Bro?' is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with 'You Done, Bro?'.  If not, see <http://www.gnu.org/licenses/>.
+###########################################################################
+
 ScreenManagement:
     RootWidget:
     AboutScreen:
@@ -25,7 +42,11 @@ ScreenManagement:
         Label:
             markup: True
             halign: 'center'
-            text: '[b]Version:[/b]  1.6'
+            text: '[b]Version:[/b]  ' + root.version()
+        Label:
+            markup: True
+            halign: 'center'
+            text: 'Copyright © 2017 Paul M. Heider'
         Button:
             text: 'Back to App'
             on_release:
@@ -92,7 +113,7 @@ ScreenManagement:
         size_hint: 0.45,0.2
         pos_hint: {'center_x': 0.5 , 'center_y' : 0.5 }
         on_press: self.parent.tap( 'pause' )
-        font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 2 )
+        font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 3 )
     Button:
         text: 'clear'
         size_hint: 0.1,0.1

@@ -1,3 +1,20 @@
+###########################################################################
+# This file is part of 'You Done, Bro?'.
+#
+# 'You Done, Bro?' is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# 'You Done, Bro?' is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with 'You Done, Bro?'.  If not, see <http://www.gnu.org/licenses/>.
+###########################################################################
+
 [app]
 
 # (str) Title of your application
@@ -7,13 +24,13 @@ title = You Done Bro
 package.name = youdonebro
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = com.proustboost
+package.domain = com.github.paulheider
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,kv
+source.include_exts = py,kv,png
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png
@@ -28,11 +45,11 @@ source.exclude_dirs = tests, bin
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 1.6
+##version = 17.40.0
 
 # (str) Application versioning (method 2)
-# version.regex = __version__ = ['"](.*)['"]
-# version.filename = %(source.dir)s/main.py
+version.regex = __version__ = ['"](.*)['"]
+version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
@@ -46,10 +63,10 @@ requirements = kivy,python2
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/resources/logo.png
+presplash.filename = %(source.dir)s/resources/ydb_icon.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/resources/logo_square.png
+icon.filename = %(source.dir)s/resources/ydb_icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = portrait

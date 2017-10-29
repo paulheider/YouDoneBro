@@ -1,3 +1,20 @@
+###########################################################################
+# This file is part of 'You Done, Bro?'.
+#
+# 'You Done, Bro?' is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# 'You Done, Bro?' is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with 'You Done, Bro?'.  If not, see <http://www.gnu.org/licenses/>.
+###########################################################################
+
 from __future__ import print_function
 
 import time
@@ -71,7 +88,10 @@ class ScreenManagement( ScreenManager ):
     pass
 
 class AboutScreen(Screen):
-    pass
+    __version__ = '17.41.0'
+    
+    def version( self , *args ):
+        return self.__version__
 
 class RootWidget(Screen): ##FloatLayout
     fac_bro_watch = ObjectProperty(None)
@@ -176,7 +196,6 @@ screen_mngr.add_widget( about_screen )
 screen_mngr.add_widget( RootWidget( name = 'Four-Way Tracker' ) )
 
 class YouDoneBroApp(App):
-    
     def build(self):
         return screen_mngr
 
