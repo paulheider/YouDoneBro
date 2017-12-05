@@ -33,6 +33,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.clock import Clock
+from kivy.uix.popup import Popup
 
 from kivy.event import EventDispatcher
 from kivy.properties import ObjectProperty
@@ -88,7 +89,7 @@ class ScreenManagement( ScreenManager ):
     pass
 
 class AboutScreen(Screen):
-    __version__ = '17.41.0'
+    __version__ = '17.49.0'
     
     def version( self , *args ):
         return self.__version__
@@ -99,9 +100,15 @@ class RootWidget(Screen): ##FloatLayout
     nf_bro_watch = ObjectProperty(None)
     nf_nd_watch = ObjectProperty(None)
     clear_event = ObjectProperty(None)
+    save_event = ObjectProperty(None)
+
+    ## TODO - clicking directly on popup also dismisses it
+    save_popup = Popup( title = 'Saved Timings',
+                        content = Label( text = '...somewhere...' ) ,
+                        size_hint = ( 0.75 , 0.4 ) )
     
     def clear_time( self , *args ):
-        self.ids[ 'about_btn' ].disabled = False
+        self.ids[ 'about_save_btn' ].text = 'about'
         self.fac_bro_watch.reset()
         self.fac_nd_watch.reset()
         self.nf_bro_watch.reset()
@@ -116,19 +123,74 @@ class RootWidget(Screen): ##FloatLayout
         self.ids[ 'fac_nd_pct' ].text = '{:0.02f}%'.format( 0 )
         self.ids[ 'nf_bro_pct' ].text = '{:0.02f}%'.format( 0 )
         self.ids[ 'nf_nd_pct' ].text = '{:0.02f}%'.format( 0 )
+
+    def save_to_disk( self , *args ):
+        ## Stop all the watches
+        self.fac_bro_watch.stop()
+        self.fac_nd_watch.stop()
+        self.nf_bro_watch.stop()
+        self.nf_nd_watch.stop()
+        ## Update the screen display
+        self.update()
+        ##
+        now_time = datetime.datetime.now()
+        now_stamp = now_time.strftime( "%Y-%m-%d %H:%M:%S" )
+        now_filesafe = now_time.strftime( "%Y-%m-%d_%H%M%S" )
+        save_file = "youdonebro_{}.csv".format( now_filesafe )
+        with open( save_file , 'w' ) as fp:
+            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( 'Timestamp' ,
+                                                     'Status' ,
+                                                     'Gender' ,
+                                                     'RawTime' ,
+                                                     'PercentageTime' ) )
+            ##
+            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                     'facilitator' ,
+                                                     'a bro' ,
+                                                     self.ids[ 'fac_bro_time' ].text ,
+                                                     self.ids[ 'fac_bro_pct' ].text ) )
+            #
+            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                     'facilitator' ,
+                                                     'not a bro' ,
+                                                     self.ids[ 'fac_nd_time' ].text ,
+                                                     self.ids[ 'fac_nd_pct' ].text ) )
+            #
+            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                     'non-facilitator' ,
+                                                     'a bro' ,
+                                                     self.ids[ 'nf_bro_time' ].text ,
+                                                     self.ids[ 'nf_bro_pct' ].text ) )
+            #
+            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                     'non-facilitator' ,
+                                                     'not a bro' ,
+                                                     self.ids[ 'nf_nd_time' ].text ,
+                                                     self.ids[ 'nf_nd_pct' ].text ) )
+        self.save_popup.content.text = save_file
+        self.save_popup.open()
     
     def press(self, button):
         if( button == 'clear' ):
             self.clear_event = partial( self.clear_time )
             Clock.schedule_once( self.clear_event , 2 )
+        elif( button == 'about' ):
+            screen_mngr.transition.direction = 'down'
+            screen_mngr.current = 'About'
+        elif( button == 'save' ):
+            self.save_event = partial( self.save_to_disk )
+            Clock.schedule_once( self.save_event , 2 )
             
     def release(self, button):
         if( button == 'clear' ):
             Clock.unschedule( self.clear_event )
             self.clear_event = ObjectProperty(None)
+        elif( button == 'save' ):
+            Clock.unschedule( self.save_to_disk )
+            self.save_event = ObjectProperty(None)
 
     def tap(self, button):
-        self.ids[ 'about_btn' ].disabled = True
+        self.ids[ 'about_save_btn' ].text = 'save'
         if( button == 'pause' ):
             self.fac_bro_watch.stop()
             self.fac_nd_watch.stop()

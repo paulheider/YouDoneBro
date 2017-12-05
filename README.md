@@ -27,6 +27,11 @@ time.
 
 The 'about' screen is only available when all timers are at zero.
 
+If any timers have any time on them, the 'save' button is available.
+It stops (pauses) all timers, updates the displayed calculations,
+and save all timers to disk.  The pop-up tells you the new file's
+name.  The 'save' button requires a long-press.
+
 For more information or to post bugs, issues, and recommendations,
 please visit the app's GitHub pages:
 - https://github.com/paulheider/YouDoneBro

@@ -100,13 +100,12 @@ ScreenManagement:
 
 
     Button:
-        id: about_btn
+        id: about_save_btn
         text: 'about'
         size_hint: 0.1,0.1
         pos_hint: {'center_x': 0.1 , 'center_y' : 0.5 }
-        on_release:
-            root.manager.transition.direction = 'down'
-            root.manager.current = 'About'
+        on_press: self.parent.press( self.text )
+        on_release: self.parent.release( self.text )
         font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 3 )
     Button:
         text: 'pause'
@@ -118,8 +117,6 @@ ScreenManagement:
         text: 'clear'
         size_hint: 0.1,0.1
         pos_hint: {'center_x': 0.9 , 'center_y' : 0.5 }
-        ##on_touch_down: self.parent.create_clock()
-        ##on_touch_up: self.parent.delete_clock()
         on_press: self.parent.press( 'clear' )
         on_release: self.parent.release( 'clear' )
         font_size: min( ( self.height - 10 ) / 2 , ( self.width - 10 ) / 3 )
