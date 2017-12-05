@@ -33,6 +33,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.clock import Clock
+from kivy.uix.popup import Popup
 
 from kivy.event import EventDispatcher
 from kivy.properties import ObjectProperty
@@ -100,6 +101,11 @@ class RootWidget(Screen): ##FloatLayout
     nf_nd_watch = ObjectProperty(None)
     clear_event = ObjectProperty(None)
     save_event = ObjectProperty(None)
+
+    ## TODO - clicking directly on popup also dismisses it
+    save_popup = Popup( title = 'Saved Timings',
+                        content = Label( text = '...somewhere...' ) ,
+                        size_hint = ( 0.75 , 0.4 ) )
     
     def clear_time( self , *args ):
         self.ids[ 'about_save_btn' ].text = 'about'
@@ -130,7 +136,8 @@ class RootWidget(Screen): ##FloatLayout
         now_time = datetime.datetime.now()
         now_stamp = now_time.strftime( "%Y-%m-%d %H:%M:%S" )
         now_filesafe = now_time.strftime( "%Y-%m-%d_%H%M%S" )
-        with open( "youdonebro_{}.csv".format( now_filesafe ) , 'w' ) as fp:
+        save_file = "youdonebro_{}.csv".format( now_filesafe )
+        with open( save_file , 'w' ) as fp:
             fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( 'Timestamp' ,
                                                      'Status' ,
                                                      'Gender' ,
@@ -160,6 +167,8 @@ class RootWidget(Screen): ##FloatLayout
                                                      'not a bro' ,
                                                      self.ids[ 'nf_nd_time' ].text ,
                                                      self.ids[ 'nf_nd_pct' ].text ) )
+        self.save_popup.content.text = save_file
+        self.save_popup.open()
     
     def press(self, button):
         if( button == 'clear' ):
