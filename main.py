@@ -149,9 +149,10 @@ class RootWidget(Screen): ##FloatLayout
         now_time = datetime.datetime.now()
         now_stamp = now_time.strftime( "%Y-%m-%d %H:%M:%S" )
         now_filesafe = now_time.strftime( "%Y-%m-%d_%H%M%S" )
+        filename = 'youdonebro_{}.csv'.format( now_filesafe )
         save_file = os.path.join( App.get_running_app().user_data_dir ,
                                   'data' ,
-                                  'youdonebro_{}.csv'.format( now_filesafe ) )
+                                  filename )
         with open( save_file , 'w' ) as fp:
             fp.write( '{}\t{}\t{}\t{}\t{}\t{}\n'.format( 'Timestamp' ,
                                                          'Status' ,
@@ -187,7 +188,7 @@ class RootWidget(Screen): ##FloatLayout
                                                          self.ids[ 'nf_nd_time' ].text ,
                                                          self.ids[ 'nf_nd_pct' ].text ,
                                                          self.nf_nd_watch.get_member_count() ) )
-        self.save_popup.content.text = save_file
+        self.save_popup.content.text = filename
         self.save_popup.open()
     
     def press(self, button):
