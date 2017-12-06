@@ -41,6 +41,10 @@ from kivy.event import EventDispatcher
 from kivy.properties import ObjectProperty
 
 class StopWatch(EventDispatcher):
+    __members = 0
+    
+    def get_member_count(self):
+        return self.__members
     
     def get_running(self):
         return self.__start_time != 0
@@ -72,17 +76,24 @@ class StopWatch(EventDispatcher):
         self.__offset = 0
         self.__start_time = 0
         self.__running = False
-    
+
+    def dec(self):
+        if( self.__members > 0 ):
+            self.__members -= 1
+
+    def inc(self):
+        self.__members += 1
+
     def __init__(self):
         self.__offset = 0
         self.__start_time = 0
         self.__running = False
     
-    
     def __repr__(self):
         hours, remainder = divmod( int( self.get_elapsed() ) , 3600 )
         minutes, seconds = divmod( remainder , 60 )
-        return '{:02d}:{:02d}:{:02d}'.format( hours , minutes , seconds )
+        return '{:02d}:{:02d}:{:02d} ({})'.format( hours , minutes , seconds ,
+                                                   self.__members )
 
 from kivy.clock import Clock
 from functools import partial
@@ -91,7 +102,7 @@ class ScreenManagement( ScreenManager ):
     pass
 
 class AboutScreen(Screen):
-    __version__ = '17.49.1'
+    __version__ = '17.49.2'
     
     def version( self , *args ):
         return self.__version__
@@ -138,40 +149,46 @@ class RootWidget(Screen): ##FloatLayout
         now_time = datetime.datetime.now()
         now_stamp = now_time.strftime( "%Y-%m-%d %H:%M:%S" )
         now_filesafe = now_time.strftime( "%Y-%m-%d_%H%M%S" )
+        filename = 'youdonebro_{}.csv'.format( now_filesafe )
         save_file = os.path.join( App.get_running_app().user_data_dir ,
                                   'data' ,
-                                  'youdonebro_{}.csv'.format( now_filesafe ) )
+                                  filename )
         with open( save_file , 'w' ) as fp:
-            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( 'Timestamp' ,
-                                                     'Status' ,
-                                                     'Gender' ,
-                                                     'RawTime' ,
-                                                     'PercentageTime' ) )
+            fp.write( '{}\t{}\t{}\t{}\t{}\t{}\n'.format( 'Timestamp' ,
+                                                         'Status' ,
+                                                         'Gender' ,
+                                                         'RawTime' ,
+                                                         'PercentageTime' ,
+                                                         'Members' ) )
             ##
-            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
-                                                     'facilitator' ,
-                                                     'a bro' ,
-                                                     self.ids[ 'fac_bro_time' ].text ,
-                                                     self.ids[ 'fac_bro_pct' ].text ) )
+            fp.write( '{}\t{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                         'facilitator' ,
+                                                         'a bro' ,
+                                                         self.ids[ 'fac_bro_time' ].text ,
+                                                         self.ids[ 'fac_bro_pct' ].text ,
+                                                         self.fac_bro_watch.get_member_count() ) )
             #
-            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
-                                                     'facilitator' ,
-                                                     'not a bro' ,
-                                                     self.ids[ 'fac_nd_time' ].text ,
-                                                     self.ids[ 'fac_nd_pct' ].text ) )
+            fp.write( '{}\t{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                         'facilitator' ,
+                                                         'not a bro' ,
+                                                         self.ids[ 'fac_nd_time' ].text ,
+                                                         self.ids[ 'fac_nd_pct' ].text ,
+                                                         self.fac_nd_watch.get_member_count() ) )
             #
-            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
-                                                     'non-facilitator' ,
-                                                     'a bro' ,
-                                                     self.ids[ 'nf_bro_time' ].text ,
-                                                     self.ids[ 'nf_bro_pct' ].text ) )
+            fp.write( '{}\t{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                         'non-facilitator' ,
+                                                         'a bro' ,
+                                                         self.ids[ 'nf_bro_time' ].text ,
+                                                         self.ids[ 'nf_bro_pct' ].text ,
+                                                         self.nf_bro_watch.get_member_count() ) )
             #
-            fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
-                                                     'non-facilitator' ,
-                                                     'not a bro' ,
-                                                     self.ids[ 'nf_nd_time' ].text ,
-                                                     self.ids[ 'nf_nd_pct' ].text ) )
-        self.save_popup.content.text = save_file
+            fp.write( '{}\t{}\t{}\t{}\t{}\t{}\n'.format( now_stamp ,
+                                                         'non-facilitator' ,
+                                                         'not a bro' ,
+                                                         self.ids[ 'nf_nd_time' ].text ,
+                                                         self.ids[ 'nf_nd_pct' ].text ,
+                                                         self.nf_nd_watch.get_member_count() ) )
+        self.save_popup.content.text = filename
         self.save_popup.open()
     
     def press(self, button):
@@ -200,6 +217,10 @@ class RootWidget(Screen): ##FloatLayout
             self.fac_nd_watch.stop()
             self.nf_bro_watch.stop()
             self.nf_nd_watch.stop()
+        elif( button == 'dec_fac_bro' ):
+            self.fac_bro_watch.dec()
+        elif( button == 'inc_fac_bro' ):
+            self.fac_bro_watch.inc()
         elif( button == 'fac_bro' ):
             if( self.fac_bro_watch.get_running() ):
                 self.fac_bro_watch.stop()
@@ -208,6 +229,10 @@ class RootWidget(Screen): ##FloatLayout
                 self.fac_nd_watch.stop()
                 self.nf_bro_watch.stop()
                 self.nf_nd_watch.stop()
+        elif( button == 'dec_fac_nd' ):
+            self.fac_nd_watch.dec()
+        elif( button == 'inc_fac_nd' ):
+            self.fac_nd_watch.inc()
         elif( button == 'fac_nd' ):
             if( self.fac_nd_watch.get_running() ):
                 self.fac_nd_watch.stop()
@@ -216,6 +241,10 @@ class RootWidget(Screen): ##FloatLayout
                 self.fac_nd_watch.start()
                 self.nf_bro_watch.stop()
                 self.nf_nd_watch.stop()
+        elif( button == 'dec_nf_bro' ):
+            self.nf_bro_watch.dec()
+        elif( button == 'inc_nf_bro' ):
+            self.nf_bro_watch.inc()
         elif( button == 'nf_bro' ):
             if( self.nf_bro_watch.get_running() ):
                 self.nf_bro_watch.stop()
@@ -224,6 +253,10 @@ class RootWidget(Screen): ##FloatLayout
                 self.fac_nd_watch.stop()
                 self.nf_bro_watch.start()
                 self.nf_nd_watch.stop()
+        elif( button == 'dec_nf_nd' ):
+            self.nf_nd_watch.dec()
+        elif( button == 'inc_nf_nd' ):
+            self.nf_nd_watch.inc()
         elif( button == 'nf_nd' ):
             if( self.nf_nd_watch.get_running() ):
                 self.nf_nd_watch.stop()
