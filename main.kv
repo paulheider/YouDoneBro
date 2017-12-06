@@ -63,6 +63,18 @@ ScreenManagement:
         pos_hint: {'center_x': 0.25 , 'top': 0.95 }
         on_press: self.parent.tap( 'fac_bro' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Button:
+        id: dec_fac_bro_btn
+        text: '-'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.125 , 'top': 0.95 }
+        on_press: self.parent.tap( 'dec_fac_bro' )
+    Button:
+        id: inc_fac_bro_btn
+        text: '+'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.375 , 'top': 0.95 }
+        on_press: self.parent.tap( 'inc_fac_bro' )
     Label:
         id: fac_bro_lbl
         text: '(facilitator)'
@@ -84,6 +96,18 @@ ScreenManagement:
         pos_hint: {'center_x': 0.75 , 'top': 0.95 }
         on_press: self.parent.tap( 'fac_nd' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Button:
+        id: dec_fac_nd_btn
+        text: '-'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.625 , 'top': 0.95 }
+        on_press: self.parent.tap( 'dec_fac_nd' )
+    Button:
+        id: inc_fac_nd_btn
+        text: '+'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.875 , 'top': 0.95 }
+        on_press: self.parent.tap( 'inc_fac_nd' )
     Label:
         id: fac_nd_lbl
         text: '(facilitator)'
@@ -128,6 +152,18 @@ ScreenManagement:
         pos_hint: {'center_x': 0.25 , 'top': 0.35 }
         on_press: self.parent.tap( 'nf_bro' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Button:
+        id: dec_nf_bro_btn
+        text: '-'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.125 , 'center_y': 0.075 }
+        on_press: self.parent.tap( 'dec_nf_bro' )
+    Button:
+        id: inc_nf_bro_btn
+        text: '+'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.375 , 'center_y': 0.075 }
+        on_press: self.parent.tap( 'inc_nf_bro' )
     Label:
         id: nf_bro_lbl
         text: '(non-facilitator)'
@@ -149,6 +185,18 @@ ScreenManagement:
         pos_hint: {'center_x': 0.75 , 'top': 0.35 }
         on_press: self.parent.tap( 'nf_nd' )
         font_size: min( ( self.height - 5 ) / 3 , ( self.width - 10 ) / 5 )
+    Button:
+        id: dec_nf_nd_btn
+        text: '-'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.625 , 'center_y': 0.075 }
+        on_press: self.parent.tap( 'dec_nf_nd' )
+    Button:
+        id: inc_nf_nd_btn
+        text: '+'
+        size_hint: 0.225,0.05
+        pos_hint: {'center_x': 0.875 , 'center_y': 0.075 }
+        on_press: self.parent.tap( 'inc_nf_nd' )
     Label:
         id: nf_nd_lbl
         text: '(non-facilitator)'
