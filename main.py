@@ -20,6 +20,8 @@ from __future__ import print_function
 import time
 import datetime
 
+import os
+
 import kivy
 
 kivy.require('1.9.1')
@@ -89,7 +91,7 @@ class ScreenManagement( ScreenManager ):
     pass
 
 class AboutScreen(Screen):
-    __version__ = '17.49.0'
+    __version__ = '17.49.1'
     
     def version( self , *args ):
         return self.__version__
@@ -136,7 +138,9 @@ class RootWidget(Screen): ##FloatLayout
         now_time = datetime.datetime.now()
         now_stamp = now_time.strftime( "%Y-%m-%d %H:%M:%S" )
         now_filesafe = now_time.strftime( "%Y-%m-%d_%H%M%S" )
-        save_file = "youdonebro_{}.csv".format( now_filesafe )
+        save_file = os.path.join( App.get_running_app().user_data_dir ,
+                                  'data' ,
+                                  'youdonebro_{}.csv'.format( now_filesafe ) )
         with open( save_file , 'w' ) as fp:
             fp.write( '{}\t{}\t{}\t{}\t{}\n'.format( 'Timestamp' ,
                                                      'Status' ,
@@ -259,7 +263,13 @@ screen_mngr.add_widget( RootWidget( name = 'Four-Way Tracker' ) )
 
 class YouDoneBroApp(App):
     def build(self):
+        self.initilize_global_dirs()
         return screen_mngr
+    
+    def initilize_global_dirs(self):
+        data_dir = os.path.join( App.get_running_app().user_data_dir , 'data' )
+        if( not os.path.exists( data_dir ) ):
+            os.makedirs( data_dir )
 
 if __name__ == '__main__':
     YouDoneBroApp().run()
