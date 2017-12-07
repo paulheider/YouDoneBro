@@ -32,6 +32,10 @@ It stops (pauses) all timers, updates the displayed calculations,
 and save all timers to disk.  The pop-up tells you the new file's
 name.  The 'save' button requires a long-press.
 
+A count of group members is displayed near the outside edge of each
+category.  You can adjust the tally for each group using the +/- buttons
+beside the count.
+
 For more information or to post bugs, issues, and recommendations,
 please visit the app's GitHub pages:
 - https://github.com/paulheider/YouDoneBro
