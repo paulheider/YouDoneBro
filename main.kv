@@ -52,6 +52,9 @@ ScreenManagement:
             on_release:
                 root.manager.transition.direction = 'up'
                 root.manager.current = 'Four-Way Tracker'
+            background_normal: ''
+            ## rgb(149,165,166)
+            background_color: [ .58431372549019607843 , .64705882352941176470 , .65098039215686274509 , 1 ]
 
 <RootWidget>:
     canvas.before:
@@ -75,18 +78,23 @@ ScreenManagement:
     Button:
         id: dec_fac_bro_btn
         text: '-'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.125 , 'top': 0.95 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.115 , 'top': 0.96 }
         on_press: self.parent.tap( 'dec_fac_bro' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
         ## rgb(241,196,15)
         background_color: [ 0.94 , 0.77 , 0.06 , 1 ]
+    Label:
+        id: fac_bro_count
+        text: '0'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.25 , 'top': 0.95 }
     Button:
         id: inc_fac_bro_btn
         text: '+'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.375 , 'top': 0.95 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.385 , 'top': 0.96 }
         on_press: self.parent.tap( 'inc_fac_bro' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
@@ -119,18 +127,23 @@ ScreenManagement:
     Button:
         id: dec_fac_nd_btn
         text: '-'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.625 , 'top': 0.95 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.615 , 'top': 0.96 }
         on_press: self.parent.tap( 'dec_fac_nd' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
         ## rgb(241,196,15)
         background_color: [ 0.94 , 0.77 , 0.06 , 1 ]
+    Label:
+        id: fac_nd_count
+        text: '0'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.75 , 'top': 0.95 }
     Button:
         id: inc_fac_nd_btn
         text: '+'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.875 , 'top': 0.95 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.885 , 'top': 0.96 }
         on_press: self.parent.tap( 'inc_fac_nd' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
@@ -195,18 +208,23 @@ ScreenManagement:
     Button:
         id: dec_nf_bro_btn
         text: '-'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.125 , 'center_y': 0.075 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.115 , 'center_y': 0.065 }
         on_press: self.parent.tap( 'dec_nf_bro' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
         ## rgb(241,196,15)
         background_color: [ 0.94 , 0.77 , 0.06 , 1 ]
+    Label:
+        id: nf_bro_count
+        text: '0'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.25 , 'center_y': 0.075 }
     Button:
         id: inc_nf_bro_btn
         text: '+'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.375 , 'center_y': 0.075 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.385 , 'center_y': 0.065 }
         on_press: self.parent.tap( 'inc_nf_bro' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
@@ -239,18 +257,23 @@ ScreenManagement:
     Button:
         id: dec_nf_nd_btn
         text: '-'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.625 , 'center_y': 0.075 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.615 , 'center_y': 0.065 }
         on_press: self.parent.tap( 'dec_nf_nd' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]
         ## rgb(241,196,15)
         background_color: [ 0.94 , 0.77 , 0.06 , 1 ]
+    Label:
+        id: nf_nd_count
+        text: '0'
+        size_hint: 0.5,0.05
+        pos_hint: {'center_x': 0.75 , 'center_y': 0.075 }
     Button:
         id: inc_nf_nd_btn
         text: '+'
-        size_hint: 0.225,0.05
-        pos_hint: {'center_x': 0.875 , 'center_y': 0.075 }
+        size_hint: 0.2,0.05
+        pos_hint: {'center_x': 0.885 , 'center_y': 0.065 }
         on_press: self.parent.tap( 'inc_nf_nd' )
         background_normal: ''
         color: [ 0 , 0 , 0 , 1 ]

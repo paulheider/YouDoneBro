@@ -92,8 +92,7 @@ class StopWatch(EventDispatcher):
     def __repr__(self):
         hours, remainder = divmod( int( self.get_elapsed() ) , 3600 )
         minutes, seconds = divmod( remainder , 60 )
-        return '{:02d}:{:02d}:{:02d} ({})'.format( hours , minutes , seconds ,
-                                                   self.__members )
+        return '{:02d}:{:02d}:{:02d}'.format( hours , minutes , seconds )
 
 from kivy.clock import Clock
 from functools import partial
@@ -102,7 +101,7 @@ class ScreenManagement( ScreenManager ):
     pass
 
 class AboutScreen(Screen):
-    __version__ = '17.49.2'
+    __version__ = '17.49.5'
     
     def version( self , *args ):
         return self.__version__
@@ -219,8 +218,10 @@ class RootWidget(Screen): ##FloatLayout
             self.nf_nd_watch.stop()
         elif( button == 'dec_fac_bro' ):
             self.fac_bro_watch.dec()
+            self.ids[ 'fac_bro_count' ].text = '{}'.format( self.fac_bro_watch.get_member_count() )
         elif( button == 'inc_fac_bro' ):
             self.fac_bro_watch.inc()
+            self.ids[ 'fac_bro_count' ].text = '{}'.format( self.fac_bro_watch.get_member_count() )
         elif( button == 'fac_bro' ):
             if( self.fac_bro_watch.get_running() ):
                 self.fac_bro_watch.stop()
@@ -231,8 +232,10 @@ class RootWidget(Screen): ##FloatLayout
                 self.nf_nd_watch.stop()
         elif( button == 'dec_fac_nd' ):
             self.fac_nd_watch.dec()
+            self.ids[ 'fac_nd_count' ].text = '{}'.format( self.fac_nd_watch.get_member_count() )
         elif( button == 'inc_fac_nd' ):
             self.fac_nd_watch.inc()
+            self.ids[ 'fac_nd_count' ].text = '{}'.format( self.fac_nd_watch.get_member_count() )
         elif( button == 'fac_nd' ):
             if( self.fac_nd_watch.get_running() ):
                 self.fac_nd_watch.stop()
@@ -243,8 +246,10 @@ class RootWidget(Screen): ##FloatLayout
                 self.nf_nd_watch.stop()
         elif( button == 'dec_nf_bro' ):
             self.nf_bro_watch.dec()
+            self.ids[ 'nf_bro_count' ].text = '{}'.format( self.nf_bro_watch.get_member_count() )
         elif( button == 'inc_nf_bro' ):
             self.nf_bro_watch.inc()
+            self.ids[ 'nf_bro_count' ].text = '{}'.format( self.nf_bro_watch.get_member_count() )
         elif( button == 'nf_bro' ):
             if( self.nf_bro_watch.get_running() ):
                 self.nf_bro_watch.stop()
@@ -255,8 +260,10 @@ class RootWidget(Screen): ##FloatLayout
                 self.nf_nd_watch.stop()
         elif( button == 'dec_nf_nd' ):
             self.nf_nd_watch.dec()
+            self.ids[ 'nf_nd_count' ].text = '{}'.format( self.nf_nd_watch.get_member_count() )
         elif( button == 'inc_nf_nd' ):
             self.nf_nd_watch.inc()
+            self.ids[ 'nf_nd_count' ].text = '{}'.format( self.nf_nd_watch.get_member_count() )
         elif( button == 'nf_nd' ):
             if( self.nf_nd_watch.get_running() ):
                 self.nf_nd_watch.stop()
