@@ -1,4 +1,4 @@
-[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e8a203b006c5460bb2295c25419d294c)](https://www.codacy.com/app/paulheider/YouDoneBro?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=paulheider/YouDoneBro&amp;utm_campaign=Badge_Grade)
 
 You Done, Bro?
 ==============
