@@ -5,6 +5,20 @@ You Done, Bro?
 
 Monitor gender and status biases in conversational turn-taking patterns.
 
+Installation
+------------
+
+"You Done, Bro?" is still in beta.  If you'd like to help with beta-testing, email [me](mailto:paul.heider+youdonebro@gmail.com) with the address that you have associated with your Google Play account.  I'm still working on the iPhone build.  (If you have any experience building an iPhone app with Kivy and would like to help, definitely email me!)
+
+Because Kivy is built on top of Python, you can also run "You Done, Bro?" as an application on your computer.  First, you'll need to [install Kivy](https://kivy.org/docs/installation/installation.html#stable-version).  Next, you'll need to download (or clone) the [latest release](https://github.com/paulheider/YouDoneBro/releases).  From the folder containing this release, run the following:
+
+```
+python main.py
+```
+
+Usage
+-----
+
 The main app screen provides four buttons for tracking conversational
 turn length in terms of strict time and overall percentage of time.
 
