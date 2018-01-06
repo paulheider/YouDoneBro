@@ -5,6 +5,8 @@ You Done, Bro?
 
 Monitor gender and status biases in conversational turn-taking patterns.
 
+<img width="200" alt="App Screenshot - Running Timers" src="https://lh3.googleusercontent.com/GGMELp0l1t8XzeN_q0OKm5OS5rW1evQubp87eZtLF_jEWXuOm3V3NLoY_sEHSh9uqJs=h900-rw">
+
 Installation
 ------------
 
