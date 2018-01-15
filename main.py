@@ -101,7 +101,7 @@ class ScreenManagement( ScreenManager ):
     pass
 
 class AboutScreen(Screen):
-    __version__ = '17.49.5'
+    __version__ = '18.03.0'
     
     def version( self , *args ):
         return self.__version__
