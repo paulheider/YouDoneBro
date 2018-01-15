@@ -44,9 +44,6 @@ source.exclude_dirs = tests, bin
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
 
-# (str) Application versioning (method 1)
-##version = 17.40.0
-
 # (str) Application versioning (method 2)
 version.regex = __version__ = ['"](.*)['"]
 version.filename = %(source.dir)s/main.py
@@ -107,11 +104,11 @@ android.permissions = WAKE_LOCK
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-android.ndk_path = /home/paul/Android/Sdk/ndk-bundle
+android.ndk_path = 
 ##/opt/android-ndk-r13b
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-android.sdk_path = /home/paul/Android/Sdk
+android.sdk_path = 
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
