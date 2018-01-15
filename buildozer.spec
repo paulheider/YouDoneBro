@@ -44,12 +44,9 @@ source.exclude_dirs = tests, bin
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
 
-# (str) Application versioning (method 1)
-version = 17.49.5
-
 # (str) Application versioning (method 2)
-#version.regex = __version__ = ['"](.*)['"]
-#version.filename = %(source.dir)s/main.py
+version.regex = __version__ = ['"](.*)['"]
+version.filename = %(source.dir)s/main.py
 
 # (list) Application requirements
 # comma seperated e.g. requirements = sqlite3,kivy
