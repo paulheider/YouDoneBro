@@ -107,11 +107,11 @@ android.permissions = WAKE_LOCK
 #android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-android.ndk_path = /home/paul/Android/Sdk/ndk-bundle
+android.ndk_path = 
 ##/opt/android-ndk-r13b
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-android.sdk_path = /home/paul/Android/Sdk
+android.sdk_path = 
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
 #android.ant_path =
