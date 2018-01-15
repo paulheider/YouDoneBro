@@ -23,7 +23,7 @@ before_install:
     #- sudo apt-get install ...
 
 install:
-    - sudo pip install coveralls
+    - sudo -H pip install coveralls
 
 env:
     global:
